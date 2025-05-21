@@ -1,16 +1,35 @@
-// script.js
-function buyVoucher(plan, amount) {
-  const phone = prompt("Enter your phone number:");
-  if (!phone) return alert("Phone number is required.");
+function payWithPaystack(plan, amount) {
+    let phone = prompt("Enter your phone number:");
+    if (!phone) return;
 
-  const paystackURL = {
-    '8hours': 'https://paystack.com/pay/8hourvoucher',
-    '30hours': 'https://paystack.com/pay/30hourvoucher',
-    '3days': 'https://paystack.com/pay/3dayvoucher',
-    '7days': 'https://paystack.com/pay/7dayvoucher',
-    '30days': 'https://paystack.com/pay/30dayvoucher'
-  }[plan];
+    let handler = PaystackPop.setup({
+        key: 'pk_live_075fe547503fcf530d4c1382cbdb30c6b66cd5c8',  // Replace with your real PUBLIC key
+        email: phone + '@kalyburconnect.com',
+        amount: amount * 100,
+        currency: 'NGN',
+        ref: '' + Math.floor(Math.random() * 1000000000 + 1),
+        metadata: {
+            custom_fields: [
+                {
+                    display_name: "Phone Number",
+                    variable_name: "phone_number",
+                    value: phone
+                },
+                {
+                    display_name: "Plan",
+                    variable_name: "voucher_plan",
+                    value: plan
+                }
+            ]
+        },
+        callback: function(response) {
+            // Redirect to backend for voucher processing
+            window.location.href = `https://aliyuibrahimmuh.repl.co/verify?reference=${response.reference}`;
+        },
+        onClose: function() {
+            alert('Transaction was cancelled');
+        }
+    });
 
-  const url = `${paystackURL}?phone=${encodeURIComponent(phone)}`;
-  window.location.href = url;
+    handler.openIframe();
 }
