@@ -1,22 +1,25 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Buy Voucher - Kalybur</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Buy Internet Voucher</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Select a Voucher Plan</h1>
-     <div class="plan"><a href="https://paystack.com/pay/8hourvoucher" target="_blank">8 Hours - ₦300</a></div>
-<div class="plan"><a href="https://paystack.com/pay/30hourvoucher" target="_blank">30 Hours - ₦550</a></div>
-<div class="plan"><a href="https://paystack.com/pay/6lj48p0vhh" target="_blank">3 Days - ₦1,200</a></div>
-<div class="plan"><a href="https://paystack.com/pay/7dayvoucher" target="_blank">7 Days - ₦2,500</a></div>
-<div class="plan"><a href="https://paystack.com/pay/30dayvoucher" target="_blank">30 Days - ₦10,000</a></div>
+    <h1>Buy a Voucher</h1>
+    <div class="plans">
+      <button onclick="payWithPaystack('8 hours', 300)">₦300 - 8 Hours</button>
+      <button onclick="payWithPaystack('30 hours', 550)">₦550 - 30 Hours</button>
+      <button onclick="payWithPaystack('3 days', 1200)">₦1200 - 3 Days</button>
+      <button onclick="payWithPaystack('7 days', 2500)">₦2500 - 7 Days</button>
+      <button onclick="payWithPaystack('30 days', 10000)">₦10000 - 30 Days</button>
+    </div>
+    <p class="info">After payment, your voucher code will appear automatically.</p>
   </div>
 
+  <script src="https://js.paystack.co/v1/inline.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
